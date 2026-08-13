@@ -39,3 +39,7 @@ test('renderPage captura un archivo local y devuelve data-uri JPEG', async () =>
 test('renderPage rechaza viewport inválido', async () => {
   await assert.rejects(() => renderPage({ target: htmlPath, viewport: 'tablet' }), /viewport/i);
 });
+
+test('renderPage rechaza claves heredadas como viewport', async () => {
+  await assert.rejects(() => renderPage({ target: htmlPath, viewport: 'constructor' }), /viewport/i);
+});

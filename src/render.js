@@ -26,7 +26,7 @@ export function resolveTarget(target) {
  * @returns {Promise<{ dataUri: string, bytes: number, width: number, height: number }>}
  */
 export async function renderPage({ target, viewport = 'desktop', delayMs = 0 }) {
-  if (!VIEWPORTS[viewport]) {
+  if (!Object.hasOwn(VIEWPORTS, viewport)) {
     throw new Error(`viewport inválido: "${viewport}" (usa "mobile" o "desktop")`);
   }
   const url = resolveTarget(target);
@@ -38,7 +38,11 @@ export async function renderPage({ target, viewport = 'desktop', delayMs = 0 }) 
       reducedMotion: 'reduce'
     });
     const page = await context.newPage();
-    await page.goto(url, { waitUntil: 'networkidle', timeout: 30000 });
+    try {
+      await page.goto(url, { waitUntil: 'networkidle', timeout: 8000 });
+    } catch {
+      await page.goto(url, { waitUntil: 'load', timeout: 30000 });
+    }
     if (delayMs > 0) await page.waitForTimeout(delayMs);
     const png = await page.screenshot({ type: 'png' });
     const { buffer, width, height, bytes } = await optimizeToJpeg(png);
