@@ -30,9 +30,17 @@ function parseArgs(argv) {
 }
 
 async function main() {
-  const opts = parseArgs(process.argv.slice(2));
+  const argv = process.argv.slice(2);
+  if (argv[0] === 'serve') {
+    const portIdx = argv.indexOf('--port');
+    const port = portIdx >= 0 ? Number(argv[portIdx + 1]) : 8787;
+    const { startServer } = await import('./src/server.js');
+    startServer(port);
+    return;
+  }
+  const opts = parseArgs(argv);
   if (opts.command !== 'render') {
-    process.stderr.write('uso: websight render <url|ruta> [--viewport mobile|desktop] [--delay-ms N] [--out FILE] [--base64]\n');
+    process.stderr.write('uso: websight render <url|ruta> [--viewport mobile|desktop] [--delay-ms N] [--out FILE] [--base64]\n       websight serve [--port N]\n');
     process.exit(1);
   }
   if (!opts.out && !opts.base64) {
