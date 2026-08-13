@@ -38,3 +38,21 @@ test('sin --out ni --base64 falla con exit 1', () => {
   assert.equal(r.status, 1);
   assert.match(r.stderr, /--out|--base64/);
 });
+
+test('--out sin valor falla con exit 1', () => {
+  const r = runCli(['render', htmlPath, '--out']);
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /--out/);
+});
+
+test('--out no consume una bandera siguiente como valor', () => {
+  const r = runCli(['render', htmlPath, '--out', '--base64']);
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /--out/);
+});
+
+test('--delay-ms no numérico falla con exit 1', () => {
+  const r = runCli(['render', htmlPath, '--delay-ms', 'abc', '--base64']);
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /delay-ms/);
+});
