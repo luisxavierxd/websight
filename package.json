@@ -1,6 +1,6 @@
 {
   "name": "websight",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Renderiza una página web y devuelve un screenshot optimizado como bloque image_url de Anthropic. Microservicio HTTP + CLI.",
   "type": "module",
   "bin": { "websight": "./cli.js" },

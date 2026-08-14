@@ -1,7 +1,7 @@
 ---
 name: websight
-description: Renderiza una página web (URL o ruta local absoluta) y devuelve un screenshot optimizado como bloque image_url de Anthropic, para "ver" el resultado de código web. Úsalo cuando necesites verificar visualmente una UI, un cambio de CSS/layout, o el render de una página antes de dar algo por bueno.
-version: 0.1.0
+description: Renderiza una página web (URL o ruta local absoluta) y devuelve un screenshot optimizado como bloque image_url de Anthropic, para "ver" el resultado de código web. Úsalo cuando pidan captura/screenshot de una página o UI, ver/previsualizar cómo se ve un sitio, verificar visualmente un cambio de CSS/layout, comprobar responsive/móvil, o QA visual del render. Triggers: screenshot, captura, cómo se ve, renderiza la página, previsualiza, responsive, móvil vs desktop, QA visual.
+version: 0.1.1
 author: Luis Xavier García Pimentel Ascencio
 license: MIT
 ---
