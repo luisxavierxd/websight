@@ -28,6 +28,19 @@ npm install
 npm link             # (opcional) expone el bin `websight` global
 ```
 
+### Como plugin de Claude Code
+
+El repo es también un marketplace/plugin de Claude Code autocontenido:
+
+```
+/plugin marketplace add luisxavierxd/websight
+/plugin install websight@websight
+```
+
+Instala una skill que enseña al agente a invocar `websight` para QA visual. Requiere
+el CLI disponible en el sistema (los pasos de arriba); el plugin aporta la skill, no
+el binario.
+
 ## CLI
 
 ```bash
