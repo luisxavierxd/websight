@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "websight",
+  "version": "1.0.0",
+  "description": "Skill websight: renderiza web y devuelve un screenshot optimizado como bloque image_url para dar visión a un LLM.",
+  "owner": {
+    "name": "Luis Xavier García Pimentel Ascencio"
+  },
+  "plugins": [
+    {
+      "name": "websight",
+      "source": "./",
+      "description": "Render web headless → bloque image_url de Anthropic. QA visual de UI para agentes.",
+      "category": "development"
+    }
+  ]
+}

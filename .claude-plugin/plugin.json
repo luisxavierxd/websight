@@ -1,0 +1,20 @@
+{
+  "name": "websight",
+  "description": "Renderiza una página web (URL o ruta local) y devuelve un screenshot optimizado como bloque image_url de Anthropic, para que un LLM 'vea' el resultado de código web. Úsalo para QA visual de UI, cambios de CSS/layout y responsive antes de dar algo por bueno.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Luis Xavier García Pimentel Ascencio"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/luisxavierxd/websight",
+  "keywords": [
+    "playwright",
+    "screenshot",
+    "headless",
+    "llm",
+    "vision",
+    "render",
+    "qa"
+  ],
+  "skills": "./.claude/skills/"
+}
