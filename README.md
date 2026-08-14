@@ -11,12 +11,22 @@ para consumo por un LLM: se reduce a **máx 1080 px en el lado largo** y se codi
 
 ## Instalación
 
+Requiere Node.js ≥ 20. El `postinstall` descarga Chromium automáticamente.
+
+Instalar el CLI global directo desde GitHub:
+
 ```bash
-npm install          # el postinstall descarga Chromium
-npm link             # (opcional) expone el bin `websight` global
+npm install -g github:luisxavierxd/websight
 ```
 
-Requiere Node.js ≥ 20.
+O clonar el repo para trabajarlo localmente:
+
+```bash
+git clone https://github.com/luisxavierxd/websight.git
+cd websight
+npm install
+npm link             # (opcional) expone el bin `websight` global
+```
 
 ## CLI
 
