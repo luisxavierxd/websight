@@ -43,3 +43,12 @@ test('renderPage rechaza viewport inválido', async () => {
 test('renderPage rechaza claves heredadas como viewport', async () => {
   await assert.rejects(() => renderPage({ target: htmlPath, viewport: 'constructor' }), /viewport/i);
 });
+
+test('renderPage acota delayMs a un techo (no espera un delay enorme)', async () => {
+  const start = Date.now();
+  const { dataUri } = await renderPage({ target: htmlPath, viewport: 'mobile', delayMs: 2147483647 });
+  const elapsed = Date.now() - start;
+  assert.ok(dataUri.startsWith('data:image/jpeg;base64,'));
+  // Con el clamp (10s techo) + arranque de browser, debe terminar muy por debajo de 60s.
+  assert.ok(elapsed < 60000, `tardó ${elapsed}ms — el clamp de delayMs no se aplicó`);
+});

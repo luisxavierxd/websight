@@ -8,6 +8,9 @@ export const VIEWPORTS = {
   desktop: { width: 1280, height: 1600 }
 };
 
+/** Techo máximo permitido para delayMs, en milisegundos. */
+export const MAX_DELAY_MS = 10000;
+
 /**
  * Normaliza el objetivo a una URL. Acepta http(s)://, file:// o una ruta
  * absoluta del sistema. Rechaza rutas relativas.
@@ -29,6 +32,7 @@ export async function renderPage({ target, viewport = 'desktop', delayMs = 0 }) 
   if (!Object.hasOwn(VIEWPORTS, viewport)) {
     throw new Error(`viewport inválido: "${viewport}" (usa "mobile" o "desktop")`);
   }
+  const effectiveDelayMs = Math.min(Math.max(Number(delayMs) || 0, 0), MAX_DELAY_MS);
   const url = resolveTarget(target);
   const browser = await chromium.launch({ headless: true });
   try {
@@ -43,7 +47,7 @@ export async function renderPage({ target, viewport = 'desktop', delayMs = 0 }) 
     } catch {
       await page.goto(url, { waitUntil: 'load', timeout: 30000 });
     }
-    if (delayMs > 0) await page.waitForTimeout(delayMs);
+    if (effectiveDelayMs > 0) await page.waitForTimeout(effectiveDelayMs);
     const png = await page.screenshot({ type: 'png' });
     const { buffer, width, height, bytes } = await optimizeToJpeg(png);
     process.stderr.write(`[websight] captura ${width}x${height} · ${(bytes / 1024).toFixed(1)} KB\n`);
