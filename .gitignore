@@ -1,3 +1,21 @@
+# dependencias y artefactos de ejecución
 node_modules/
 *.log
 out.jpg
+*.jpg
+*.jpeg
+*.png
+
+# artefactos de desarrollo / superpowers (no deben publicarse)
+.superpowers/
+docs/superpowers/
+*.diff
+*.brief.md
+task-*-report.md
+progress.md
+scratchpad/
+coverage/
+
+# sistema
+.DS_Store
+Thumbs.db

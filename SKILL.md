@@ -2,7 +2,7 @@
 name: websight
 description: Renderiza una página web (URL o ruta local) y devuelve un screenshot optimizado como bloque image_url de Anthropic, para que un LLM "vea" el resultado de código web. Microservicio HTTP + CLI global.
 version: 0.1.0
-author:
+author: Luis Xavier García Pimentel Ascencio
 ---
 
 # websight
@@ -13,12 +13,13 @@ Motor: Playwright (Chromium). Optimiza siempre la imagen para consumo por LLM
 
 ## CLI
 
-    websight render <url|ruta-absoluta> --viewport mobile|desktop [--delay-ms N] --out captura.jpg
+    websight render <url|ruta-absoluta> [--viewport mobile|desktop] [--delay-ms N] [--out captura.jpg]
     websight render http://localhost:3000 --viewport mobile --base64
-    websight serve --port 8787
+    websight serve [--port N]        # por defecto 8787
 
 - `--out FILE`   escribe el JPEG a disco.
 - `--base64`     emite el data-URI (`data:image/jpeg;base64,…`) a stdout.
+- Debes pasar `--out` o `--base64` (o ambos). `--delay-ms` se acota a 10 s.
 
 ## HTTP
 

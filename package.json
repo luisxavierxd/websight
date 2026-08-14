@@ -1,10 +1,21 @@
 {
   "name": "websight",
   "version": "0.1.0",
-  "description": "Renderiza una página web y devuelve un screenshot optimizado como bloque image_url de Anthropic. Microservicio + CLI.",
+  "description": "Renderiza una página web y devuelve un screenshot optimizado como bloque image_url de Anthropic. Microservicio HTTP + CLI.",
   "type": "module",
   "bin": { "websight": "./cli.js" },
   "engines": { "node": ">=20" },
+  "files": ["cli.js", "src/", "SKILL.md"],
+  "keywords": [
+    "playwright",
+    "screenshot",
+    "headless",
+    "llm",
+    "anthropic",
+    "vision",
+    "render",
+    "cli"
+  ],
   "scripts": {
     "test": "node --test",
     "postinstall": "playwright install chromium"
@@ -13,6 +24,12 @@
     "playwright": "1.62.1",
     "sharp": "0.35.3"
   },
-  "author": "",
-  "license": "MIT"
+  "author": "Luis Xavier García Pimentel Ascencio",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luisxavierxd/websight.git"
+  },
+  "homepage": "https://github.com/luisxavierxd/websight#readme",
+  "bugs": { "url": "https://github.com/luisxavierxd/websight/issues" }
 }
