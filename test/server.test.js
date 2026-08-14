@@ -42,3 +42,45 @@ test('viewport inválido devuelve 400', async () => {
   assert.equal(status, 400);
   assert.ok(json.error);
 });
+
+async function postRaw(text) {
+  const res = await fetch(`http://127.0.0.1:${port}/api/v1/skills/websight/render`, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: text
+  });
+  return { status: res.status, json: await res.json() };
+}
+
+test('body JSON null devuelve 400 y no tumba el server', async () => {
+  const { status, json } = await postRaw('null');
+  assert.equal(status, 400);
+  assert.ok(json.error);
+  // el server sigue vivo: una petición válida de viewport sigue respondiendo
+  const again = await post({ target_url: htmlPath, viewport: 'mobile' });
+  assert.equal(again.status, 200);
+});
+
+test('body JSON inválido devuelve 400', async () => {
+  const { status, json } = await postRaw('{not json');
+  assert.equal(status, 400);
+  assert.ok(json.error);
+});
+
+test('falta target_url devuelve 400', async () => {
+  const { status, json } = await post({ viewport: 'mobile' });
+  assert.equal(status, 400);
+  assert.ok(json.error);
+});
+
+test('fallo de render devuelve 500', async () => {
+  // ruta relativa: resolveTarget la rechaza antes de lanzar el navegador
+  const { status, json } = await post({ target_url: 'relativo/no-absoluto.html', viewport: 'desktop' });
+  assert.equal(status, 500);
+  assert.ok(json.error);
+});
+
+test('ruta desconocida devuelve 404', async () => {
+  const res = await fetch(`http://127.0.0.1:${port}/otra/ruta`, { method: 'GET' });
+  assert.equal(res.status, 404);
+});

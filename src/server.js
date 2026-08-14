@@ -32,6 +32,9 @@ export function createServer() {
     } catch (err) {
       return send(res, 400, { error: err.message });
     }
+    if (typeof body !== 'object' || body === null || Array.isArray(body)) {
+      return send(res, 400, { error: 'body debe ser un objeto JSON' });
+    }
     const viewport = body.viewport ?? 'desktop';
     if (viewport !== 'mobile' && viewport !== 'desktop') {
       return send(res, 400, { error: `viewport inválido: "${viewport}"` });
